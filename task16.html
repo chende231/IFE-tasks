@@ -1,0 +1,51 @@
+<!DOCTYPE>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>IFE JavaScript Task 16</title>
+  </head>
+<body>
+
+  <div>
+    <label>城市名称：<input id="aqi-city-input" type="text"></label><br>
+    <label>空气质量指数：<input id="aqi-value-input" type="text"></label><br>
+    <button id="add-btn">确认添加</button>
+  </div>
+  <div id="aqi-table">
+
+  </div>
+<script type="text/javascript">
+  window.onload=function(){
+      var City=document.getElementById("aqi-city-input");
+      var Air=document.getElementById("aqi-value-input");
+      var Add=document.getElementById("add-btn");
+      var oTable=document.getElementById("aqi-table");
+      var oul=document.createElement("ul");
+      oTable.appendChild(oul);
+
+      Add.onclick=function(){
+
+          var oli=document.createElement('li');
+          oli.innerHTML=City.value.replace(/[ ]/g,"")+"&nbsp;&nbsp;"+Air.value+"&nbsp;&nbsp;"+" <span>删除</span>";
+          var r = /^[0-9]*[1-9][0-9]*$/　　//正整数
+          if(r.test(Air.value)==false) //str为你要判断的字符 执行返回结果 true 或 false
+          {
+              alert("输入错误");
+              return false;
+          }
+          oul.appendChild(oli);
+          var oBtn=document.getElementsByTagName('span');
+          for(var i=0;i<oBtn.length;i++){
+              oBtn[i].onclick=function(){
+                  oul.removeChild(this.parentNode);
+              }
+          }
+
+      }
+  }
+
+
+
+</script>
+</body>
+</html>
