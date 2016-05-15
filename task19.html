@@ -1,0 +1,125 @@
+<!DOCTYPE>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>IFE JavaScript Task 19</title>
+    <style type="text/css">
+    #result div {
+      padding:5px;
+      background-color: red;
+      text-align: center;
+      float: left;
+    }
+    #result{
+      display:flex;
+      align-items:flex-end;
+    }
+    button:nth-child(4){
+      margin-left: 30px;
+    }
+    </style>
+  </head>
+<body>
+  
+  <div>
+    <input  id="txt" type="text" />
+    <button id="left-in">左侧入</button>
+    <button id="right-in">右侧入</button>
+    <button id="left-out">左侧出</button>
+    <button id="right-out">右侧出</button>
+    <button id="sort">排序</button>
+  </div>
+  <div id="result"></div>
+  <script type="text/javascript">
+    var result=document.getElementById("result");
+    var txt=document.getElementById("txt");
+    var leftIn=document.getElementById("left-in");
+    var RightIn=document.getElementById("right-in");
+    var Leftout=document.getElementById("left-out");
+    var Rightout=document.getElementById("right-out");
+    var aDiv=result.getElementsByTagName('div');
+    leftIn.onclick=function(){
+      var oDiv=document.createElement('div');
+      if(isNaN(txt.value)){
+         alert("请输入数字！");
+      }
+      else if(txt.value>1&&txt.value<60){
+        oDiv.innerHTML=txt.value;
+        oDiv.style.height=oDiv.offsetHeight+txt.value+"px";
+        result.insertBefore(oDiv,aDiv[0]);  
+      }  
+      else if(aDiv.length>100){
+        alert("数组空间已满");
+      }
+      else{
+        alert("输入超出限制");
+      }  
+    }
+    RightIn.onclick=function(){
+      var oDiv=document.createElement("div");
+      if(isNaN(txt.value)){
+         alert("请输入数字！");
+      }
+      else if(txt.value>1&&txt.value<60){
+        result.appendChild(oDiv);
+        oDiv.style.height=txt.value+"px";
+        oDiv.innerHTML=txt.value;
+      }
+      else{
+        alert("输入超出限制");
+      }
+    }
+    Leftout.onclick=function(){
+      alert(aDiv[0].innerHTML);
+      result.removeChild(aDiv[0]);
+    }
+    Rightout.onclick=function(){
+      alert(aDiv[aDiv.length-1].innerHTML);
+      result.removeChild(aDiv[aDiv.length-1]);
+    }
+    window.onload=function(){
+    for (var i = 0; i < aDiv.length; i++) {
+      aDiv[i].onclick=function(){
+        this.style.display="none";
+      }
+    };
+  }
+var sortBtn=document.getElementById("sort");
+sortBtn.onclick=function(){
+  var i=0;
+  var j=i+1;
+  var timer=null;
+  timer=setInterval(function(){
+      if(i<result.childNodes.length)
+      {
+        console.log(i);
+        if(j<result.childNodes.length){
+          if(result.childNodes[i].style.height>result.childNodes[j].style.height){
+            var t;
+            var str = result.childNodes[i].innerHTML;
+            t = result.childNodes[i].style.height;
+            console.log(t);
+            result.childNodes[i].style.height = result.childNodes[j].style.height;
+            result.childNodes[i].innerHTML = result.childNodes[j].innerHTML;
+            result.childNodes[j].style.height = t;  
+            result.childNodes[j].innerHTML= str;
+          }
+          j++;
+        }
+        else{
+          i++;
+          j=i+1;
+        }
+      }
+      else
+        clearInterval(timer);
+    },500);
+  }
+
+
+
+  
+    
+  </script>
+</body>
+</html>
